@@ -1,0 +1,2 @@
+ALTER TABLE "invitations" ADD COLUMN "previous_token_hashes" text[] DEFAULT '{}'::text[] NOT NULL;--> statement-breakpoint
+CREATE INDEX "invitations_previous_tokens_idx" ON "invitations" USING gin ("previous_token_hashes");

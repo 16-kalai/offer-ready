@@ -1,0 +1,23 @@
+# Render Blueprint (optional): a dedicated background worker for when traffic outgrows inline jobs. The web app runs on Vercel. See docs/deploy.md.
+services:
+  - type: web
+    name: offerready-worker
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: corepack enable && pnpm install --frozen-lockfile
+    startCommand: pnpm worker:start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: BETTER_AUTH_SECRET
+        sync: false
+      - key: BETTER_AUTH_URL
+        value: https://offer-ready.vercel.app
+      - key: JOBS_INLINE
+        value: "false"
+      - key: GEMINI_API_KEY
+        sync: false

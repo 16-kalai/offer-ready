@@ -1,0 +1,1 @@
+ALTER TYPE "public"."activity_kind" ADD VALUE 'jd_approved' BEFORE 'kit_ready';

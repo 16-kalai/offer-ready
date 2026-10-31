@@ -1,0 +1,9 @@
+# Never upload local data, secrets or build output (Vercel's CLI doesn't read .gitignore).
+.data
+.env*
+!.env.example
+.next
+.vercel
+node_modules
+*.tsbuildinfo
+.DS_Store

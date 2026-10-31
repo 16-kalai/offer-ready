@@ -1,0 +1,10 @@
+# Never upload local data, secrets or build output to Cloud Build.
+.data
+.env*
+!.env.example
+.git
+.next
+.vercel
+node_modules
+*.tsbuildinfo
+.DS_Store

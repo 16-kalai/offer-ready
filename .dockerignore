@@ -1,0 +1,10 @@
+# Never put local data, secrets or build output in the image.
+.data
+.env*
+!.env.example
+.git
+.next
+.vercel
+node_modules
+*.tsbuildinfo
+.DS_Store

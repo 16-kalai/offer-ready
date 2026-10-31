@@ -1,0 +1,21 @@
+allowBuilds:
+  embedded-postgres: true
+  "@embedded-postgres/darwin-arm64": true
+  sharp: false
+  unrs-resolver: false
+  # Not needed to build or run (and not run locally either): the Linux local database is dev-only,
+  # and the rest ship working binaries or only check versions in their scripts.
+  "@embedded-postgres/linux-x64": false
+  "@google/genai": false
+  esbuild: false
+  onnxruntime-node: false
+  protobufjs: false
+minimumReleaseAgeExclude:
+  - "@better-auth/core@1.7.13"
+  - "@better-auth/drizzle-adapter@1.7.13"
+  - "@better-auth/kysely-adapter@1.7.13"
+  - "@better-auth/memory-adapter@1.7.13"
+  - "@better-auth/mongo-adapter@1.7.13"
+  - "@better-auth/prisma-adapter@1.7.13"
+  - "@better-auth/telemetry@1.7.13"
+  - better-auth@1.7.13
