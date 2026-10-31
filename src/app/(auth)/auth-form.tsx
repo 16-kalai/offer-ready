@@ -94,7 +94,7 @@ export function AuthForm({
           </div>
         )}
         <div className="grid gap-1.5">
-          <Label htmlFor={ids.email}>Work email</Label>
+          <Label htmlFor={ids.email}>Email address</Label>
           <Input
             id={ids.email}
             name="email"
@@ -102,7 +102,7 @@ export function AuthForm({
             autoComplete="email"
             required
             maxLength={254}
-            placeholder="you@company.com"
+            placeholder="you@example.com"
             className="h-11 px-3"
           />
         </div>

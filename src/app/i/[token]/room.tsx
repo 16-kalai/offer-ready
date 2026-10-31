@@ -470,20 +470,32 @@ function Orb({
       <div
         ref={halo}
         className={cn(
-          "absolute inset-6 rounded-full blur-xl transition-colors duration-500",
-          speaking === "candidate" ? "bg-emerald-400" : "bg-neutral-400",
+          "absolute inset-6 rounded-full blur-2xl transition-colors duration-500",
+          speaking === "candidate" ? "bg-proof" : "bg-primary/70",
         )}
       />
+      {/* The brand's voice orb: violet while the interviewer speaks, lime while you do. */}
       <div
         ref={core}
-        className={cn(
-          "relative flex size-28 items-center justify-center rounded-full shadow-[0_20px_60px_-20px_rgb(0_0_0/0.5)] transition-colors duration-500 sm:size-32",
-          speaking === "candidate"
-            ? "bg-gradient-to-br from-emerald-400 to-emerald-600"
-            : "bg-gradient-to-br from-neutral-700 to-neutral-950",
-        )}
+        className="relative flex size-28 items-center justify-center overflow-hidden rounded-full shadow-[0_24px_70px_-24px_oklch(0.45_0.21_276/0.7)] sm:size-32"
+        style={{
+          background:
+            speaking === "candidate"
+              ? "radial-gradient(circle at 30% 30%, oklch(0.97 0.08 128), oklch(0.86 0.2 128) 45%, oklch(0.55 0.16 150))"
+              : "radial-gradient(circle at 30% 28%, oklch(0.95 0.05 280), oklch(0.62 0.22 285) 42%, oklch(0.38 0.2 270) 80%)",
+          transition: "background 0.5s",
+        }}
       >
-        {connecting && <Loader2 className="size-6 animate-spin text-white/80" />}
+        <div
+          className={cn("absolute -inset-1/4", speaking && "animate-orb-spin")}
+          style={{
+            background:
+              "conic-gradient(from 90deg, transparent 0 30%, oklch(0.9 0.15 200 / 0.55) 40%, transparent 55%, oklch(0.88 0.2 128 / 0.5) 70%, transparent 85%)",
+            mixBlendMode: "screen",
+          }}
+        />
+        <div className="absolute inset-[14%] rounded-full bg-white/10 blur-md" />
+        {connecting && <Loader2 className="relative size-6 animate-spin text-white/80" />}
       </div>
     </div>
   );

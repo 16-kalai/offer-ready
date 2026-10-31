@@ -47,3 +47,6 @@ next-env.d.ts
 # local-only demo credentials
 scripts/demo-account.md
 .claude/
+
+# demo recordings (large)
+/demo-video

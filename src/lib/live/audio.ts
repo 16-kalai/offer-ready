@@ -55,6 +55,9 @@ export interface Mic {
  */
 function devSilentMic(): MediaStream | null {
   if (process.env.NODE_ENV === "production") return null;
+  // Dev only: the demo recorder's synthetic candidate voice (scripts/demo/record.mts).
+  const demo = (window as unknown as { __demoMic?: MediaStream }).__demoMic;
+  if (demo) return demo;
   if (new URLSearchParams(window.location.search).get("devmic") !== "silent") return null;
   const ctx = new AudioContext();
   const destination = ctx.createMediaStreamDestination();

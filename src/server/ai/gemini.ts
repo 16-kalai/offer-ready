@@ -162,14 +162,29 @@ export async function generateGrounded(request: {
 }
 
 /** Gemini text to speech, as a WAV file the browser can play (it returns raw 24 kHz PCM). */
-export async function speak(text: string): Promise<Uint8Array> {
+export async function speak(text: string, voice?: string): Promise<Uint8Array> {
   const { GEMINI_TTS_MODEL, GEMINI_TTS_VOICE } = env();
+  // Each voice model has its own quota: when one is used up, the next one speaks.
+  const models = [...new Set([GEMINI_TTS_MODEL, "gemini-3.1-flash-tts-preview", "gemini-3.8-flash-lite-tts"])];
+  let lastError: unknown;
+  for (const model of models) {
+    try {
+      return await speakWith(model, text, voice ?? GEMINI_TTS_VOICE);
+    } catch (error) {
+      lastError = error;
+      if (!RETRYABLE.test(error instanceof Error ? error.message : String(error))) break;
+    }
+  }
+  throw new AiUnavailableError(lastError instanceof Error ? lastError.message : String(lastError));
+}
+
+async function speakWith(model: string, text: string, voice: string): Promise<Uint8Array> {
   const response = await gemini().models.generateContent({
-    model: GEMINI_TTS_MODEL,
+    model,
     contents: [{ role: "user", parts: [{ text }] }],
     config: {
       responseModalities: ["AUDIO"],
-      speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: GEMINI_TTS_VOICE } } },
+      speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } },
       abortSignal: AbortSignal.timeout(60_000),
     },
   });

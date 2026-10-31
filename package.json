@@ -30,7 +30,8 @@
     "dev:demo-report": "tsx --import ./scripts/server-only-shim.mjs --env-file=.env.local scripts/demo-report.mts",
     "eval:cases": "tsx --import ./scripts/server-only-shim.mjs --env-file=.env.local scripts/eval-cases.mts",
     "live:smoke": "tsx --import ./scripts/server-only-shim.mjs --env-file=.env.local scripts/live-smoke.mts",
-    "coach:run": "tsx --import ./scripts/server-only-shim.mjs --env-file=.env.local scripts/coach-run.mts"
+    "coach:run": "tsx --import ./scripts/server-only-shim.mjs --env-file=.env.local scripts/coach-run.mts",
+    "demo:record": "tsx --import ./scripts/server-only-shim.mjs --env-file=.env.local scripts/demo/record.mts"
   },
   "dependencies": {
     "@google/genai": "^2.31.0",
@@ -71,6 +72,7 @@
     "drizzle-kit": "0.31.11",
     "embedded-postgres": "18.4.0-beta.17",
     "pdf-lib": "^1.17.1",
+    "playwright-core": "^1.64.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

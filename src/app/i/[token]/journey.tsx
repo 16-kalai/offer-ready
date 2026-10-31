@@ -32,6 +32,10 @@ export function Journey({
 
   // Leaving the page mid-call keeps the attempt resumable.
   useEffect(() => () => call.dispose(), [call]);
+  // Dev only: lets the demo recorder follow the call (scripts/demo/record.mts).
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "production") (window as unknown as { __call?: InterviewCall }).__call = call;
+  }, [call]);
 
   if (snap.status === "ended")
     return (
