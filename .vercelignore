@@ -7,3 +7,5 @@
 node_modules
 *.tsbuildinfo
 .DS_Store
+scripts/demo-account.md
+.claude
